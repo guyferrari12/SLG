@@ -1,5 +1,5 @@
 > [!WARNING]
-> Vape is discontinued, this page will now be held as an archive of my work more then anything.
+> Vape is discontinued, this page will now be held as an archive of 7GrandDadPGN's work more then anything.
 
 <p align="center">
   <picture>
