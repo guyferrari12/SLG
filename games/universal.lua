@@ -5969,17 +5969,21 @@ run(function()
 	NoEWait = vape.Categories.Utility:CreateModule({
 		Name = 'NoEWait',
 		Function = function(callback)
-   			if instance and instance:IsA("ProximityPrompt") then
-     		  		if instance.HoldDuration then
-					instance.HoldDuration = 0
-				end
-   			 end
+			for _,instance in next, game:GetDescendants() do
+   				if instance and instance:IsA("ProximityPrompt") then
+     		  			if instance.HoldDuration then
+						instance.HoldDuration = 0
+					end
+   				end
+			end
 
-  	  		if instance ~= nil and instance:IsA("ProximityPrompt") then
-        			if instance.HoldDuration then
+			(game.DescendantAdded:Connectfunction(instance)
+  	  			if instance ~= nil and instance:IsA("ProximityPrompt") then
+        				if instance.HoldDuration then
 					instance.HoldDuration =0
-        			end
-    			end
+        				end
+    				end
+			end)
 	})
 end)
 
