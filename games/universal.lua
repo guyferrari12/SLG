@@ -5966,9 +5966,10 @@ end)
 run(function()
     local Workspace = game:GetService("Workspace")
     
-    -- Variable to store the connection and toggle state
+    -- Variables to store connection and toggle state
     local NoEWaitConnection
-    local NoEWaitEnabled = false  -- Track whether the module is enabled
+    local NoEWaitEnabled = false
+    local originalHoldDurations = {} -- Table to store original HoldDuration values
 
     local NoEWait = vape.Categories.Utility:CreateModule({
         Name = "NoEWait",
@@ -5976,21 +5977,35 @@ run(function()
             if NoEWaitEnabled then
                 -- Disable the feature
                 NoEWaitEnabled = false
-                
-                -- Disconnect the event if it's connected
+
+                -- Restore original HoldDuration values
+                for instance, duration in pairs(originalHoldDurations) do
+                    if instance and instance.Parent then
+                        instance.HoldDuration = duration
+                    end
+                end
+
+                -- Clear stored values
+                originalHoldDurations = {}
+
+                -- Disconnect event listener
                 if NoEWaitConnection then
                     NoEWaitConnection:Disconnect()
                     NoEWaitConnection = nil
                 end
-                
-                print("[NoEWait] Disabled")
+
+                print("[NoEWait] Disabled - HoldDuration restored")
             else
                 -- Enable the feature
                 NoEWaitEnabled = true
 
-                -- Function to set HoldDuration to 0
+                -- Function to set HoldDuration to 0 and store original values
                 local function disableEWait(prompt)
                     if prompt:IsA("ProximityPrompt") then
+                        -- Store the original HoldDuration only if not already stored
+                        if originalHoldDurations[prompt] == nil then
+                            originalHoldDurations[prompt] = prompt.HoldDuration
+                        end
                         prompt.HoldDuration = 0
                     end
                 end
@@ -6005,7 +6020,7 @@ run(function()
                     disableEWait(instance)
                 end)
 
-                print("[NoEWait] Enabled")
+                print("[NoEWait] Enabled - HoldDuration set to 0")
             end
 
             -- Call the callback if provided
