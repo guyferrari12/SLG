@@ -843,7 +843,24 @@ run(function()
 		num += num < -(math.pi / 2) and math.pi or 0
 		return num
 	end
-	
+
+	NoEWait = vape.Categories.Combat:CreateModule({
+		Name = 'NoEWait',	
+		for _,instance in next, game:GetDescendants() do
+    if instance and instance:IsA("ProximityPrompt") then
+        if instance.HoldDuration then
+            instance.HoldDuration = 0
+        end
+    end
+end
+
+game.DescendantAdded:Connect(function(instance)
+    if instance ~= nil and instance:IsA("ProximityPrompt") then
+        if instance.HoldDuration then
+            instance.HoldDuration =0
+        end
+    end
+end)
 	AimAssist = vape.Categories.Combat:CreateModule({
 		Name = 'AimAssist',
 		Function = function(callback)
