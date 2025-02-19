@@ -5978,12 +5978,12 @@ run(function()
 			end
 
 			(game.DescendantAdded:Connectfunction(instance)
-  	  			if instance ~= nil and instance:IsA("ProximityPrompt") then
+						)if instance ~= nil and instance:IsA("ProximityPrompt") then
         				if instance.HoldDuration then
-					instance.HoldDuration =0
+						instance.HoldDuration =0
         				end
     				end
-			end)
+			end
 	})
 end)
 
