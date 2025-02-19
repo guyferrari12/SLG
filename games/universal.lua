@@ -5994,7 +5994,6 @@ run(function()
                     NoEWaitConnection = nil
                 end
 
-                print("[NoEWait] Disabled - HoldDuration restored")
             else
                 -- Enable the feature
                 NoEWaitEnabled = true
@@ -6020,7 +6019,6 @@ run(function()
                     disableEWait(instance)
                 end)
 
-                print("[NoEWait] Enabled - HoldDuration set to 0")
             end
 
             -- Call the callback if provided
