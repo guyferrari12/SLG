@@ -5970,20 +5970,20 @@ run(function()
 		Name = 'NoEWait',
 		Function = function(callback)
 			for _,instance in next, game:GetDescendants() do
-   				if instance and instance:IsA("ProximityPrompt") then
-     		  			if instance.HoldDuration then
-						instance.HoldDuration = 0
-					end
-   				end
-			end
+    if instance and instance:IsA("ProximityPrompt") then
+        if instance.HoldDuration then
+            instance.HoldDuration = 0
+        end
+    end
+end
 
-			(game.DescendantAdded:Connectfunction(instance)
-						if instance ~= nil and instance:IsA("ProximityPrompt") then
-        				if instance.HoldDuration then
-						instance.HoldDuration =0
-        				end
-    				end
-			end
+game.DescendantAdded:Connect(function(instance)
+    if instance ~= nil and instance:IsA("ProximityPrompt") then
+        if instance.HoldDuration then
+            instance.HoldDuration =0
+        end
+    end
+end)
 	})
 end)
 
