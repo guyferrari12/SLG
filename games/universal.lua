@@ -6026,7 +6026,7 @@ run(function()
     })
 end)
 
---ChatGPT's answer for implementing my basic NoEWait script for proximity functions.
+--ChatGPT's answer for implementing my basic NoEWait script for proximity functions into the Vape GUI.
 
 run(function()
 	local AntiRagdoll
