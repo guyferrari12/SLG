@@ -6021,11 +6021,12 @@ run(function()
 
             end
 
-            -- Call the callback if provided
-        end
+        end,
+	Tooltip = 'A basic ProximityFunction script, use at your own risk'
     })
 end)
---chatGPT answer
+
+--ChatGPT's answer for implementing my basic NoEWait script for proximity functions.
 
 run(function()
 	local AntiRagdoll
