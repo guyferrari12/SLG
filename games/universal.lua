@@ -6022,9 +6022,6 @@ run(function()
             end
 
             -- Call the callback if provided
-            if callback then
-                callback()
-            end
         end
     })
 end)
