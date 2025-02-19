@@ -5963,7 +5963,7 @@ run(function()
 	})
 end)
 
-run(function()
+run(function Name()
 	local Workspace = game:GetService("Workspace")
 
 	NoEWait = vape.Categories.Utility:CreateModule({
