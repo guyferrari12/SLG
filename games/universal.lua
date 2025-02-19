@@ -5964,28 +5964,37 @@ run(function()
 end)
 
 run(function()
-	local Workspace = game:GetService("Workspace")
+    local Workspace = game:GetService("Workspace")
 
-	NoEWait = vape.Categories.Utility:CreateModule({
-		Name = 'NoEWait',
-		Function = function(callback)
-			for _,instance in next, game:GetDescendants() do
-    if instance and instance:IsA("ProximityPrompt") then
-        if instance.HoldDuration then
-            instance.HoldDuration = 0
-        end
-    end
-end
+    local NoEWait = vape.Categories.Utility:CreateModule({
+        Name = "NoEWait",
+        Function = function(callback)
+            -- Function to set HoldDuration to 0
+            local function disableEWait(prompt)
+                if prompt:IsA("ProximityPrompt") then
+                    prompt.HoldDuration = 0
+                end
+            end
 
-game.DescendantAdded:Connect(function(instance)
-    if instance ~= nil and instance:IsA("ProximityPrompt") then
-        if instance.HoldDuration then
-            instance.HoldDuration =0
+            -- Modify existing ProximityPrompts
+            for _, instance in ipairs(game:GetDescendants()) do
+                disableEWait(instance)
+            end
+
+            -- Store the connection so it can be managed
+            local connection
+            connection = game.DescendantAdded:Connect(function(instance)
+                disableEWait(instance)
+            end)
+
+            -- Call the callback if provided
+            if callback then
+                callback()
+            end
         end
-    end
+    })
 end)
-	})
-end)
+--chatGPT answer
 
 run(function()
 	local AntiRagdoll
