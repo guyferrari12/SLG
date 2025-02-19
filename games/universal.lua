@@ -5962,7 +5962,27 @@ run(function()
 		Decimal = 10
 	})
 end)
-	
+
+run(function()
+	local NoEWait
+
+	NoEWait = vape.Categories.Utility:CreateModule({
+		Name = 'NoEWait',
+		Function = function(callback)
+   			if instance and instance:IsA("ProximityPrompt") then
+     		  		if instance.HoldDuration then
+					instance.HoldDuration = 0
+				end
+   			 end
+
+  	  		if instance ~= nil and instance:IsA("ProximityPrompt") then
+        			if instance.HoldDuration then
+					instance.HoldDuration =0
+        			end
+    			end
+	})
+end)
+
 run(function()
 	local AntiRagdoll
 	
