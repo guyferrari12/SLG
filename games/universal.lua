@@ -5965,27 +5965,48 @@ end)
 
 run(function()
     local Workspace = game:GetService("Workspace")
+    
+    -- Variable to store the connection and toggle state
+    local NoEWaitConnection
+    local NoEWaitEnabled = false  -- Track whether the module is enabled
 
     local NoEWait = vape.Categories.Utility:CreateModule({
         Name = "NoEWait",
         Function = function(callback)
-            -- Function to set HoldDuration to 0
-            local function disableEWait(prompt)
-                if prompt:IsA("ProximityPrompt") then
-                    prompt.HoldDuration = 0
+            if NoEWaitEnabled then
+                -- Disable the feature
+                NoEWaitEnabled = false
+                
+                -- Disconnect the event if it's connected
+                if NoEWaitConnection then
+                    NoEWaitConnection:Disconnect()
+                    NoEWaitConnection = nil
                 end
-            end
+                
+                print("[NoEWait] Disabled")
+            else
+                -- Enable the feature
+                NoEWaitEnabled = true
 
-            -- Modify existing ProximityPrompts
-            for _, instance in ipairs(game:GetDescendants()) do
-                disableEWait(instance)
-            end
+                -- Function to set HoldDuration to 0
+                local function disableEWait(prompt)
+                    if prompt:IsA("ProximityPrompt") then
+                        prompt.HoldDuration = 0
+                    end
+                end
 
-            -- Store the connection so it can be managed
-            local connection
-            connection = game.DescendantAdded:Connect(function(instance)
-                disableEWait(instance)
-            end)
+                -- Modify existing ProximityPrompts
+                for _, instance in ipairs(game:GetDescendants()) do
+                    disableEWait(instance)
+                end
+
+                -- Listen for new ProximityPrompt instances being added
+                NoEWaitConnection = game.DescendantAdded:Connect(function(instance)
+                    disableEWait(instance)
+                end)
+
+                print("[NoEWait] Enabled")
+            end
 
             -- Call the callback if provided
             if callback then
