@@ -5964,7 +5964,7 @@ run(function()
 end)
 
 run(function()
-	local NoEWait
+	local Workspace = game:GetService("Workspace")
 
 	NoEWait = vape.Categories.Utility:CreateModule({
 		Name = 'NoEWait',
@@ -5978,7 +5978,7 @@ run(function()
 			end
 
 			(game.DescendantAdded:Connectfunction(instance)
-						)if instance ~= nil and instance:IsA("ProximityPrompt") then
+						if instance ~= nil and instance:IsA("ProximityPrompt") then
         				if instance.HoldDuration then
 						instance.HoldDuration =0
         				end
